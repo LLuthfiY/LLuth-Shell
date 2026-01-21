@@ -31,10 +31,6 @@ Singleton {
             property string main: lucide.font.family
             property string title: lucide.font.family
             property string iconLucide: lucide.font.family
-            property string iconNerd: "CaskaydiaCove NFP"
-            property string monospace: "CaskaydiaMono NFP"
-            property string reading: "Readex Pro"
-            property string expressive: "Space Grotesk"
         }
         property QtObject pixelSize: QtObject {
             property int smallest: 10

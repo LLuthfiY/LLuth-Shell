@@ -19,14 +19,12 @@ Item {
         color: Color.colors.primary
         width: Variable.sizes.notificationAppIconSize
         height: Variable.sizes.notificationAppIconSize
-        LucideIcon {
-            id: icon
-            icon: "message-circle"
-            anchors.centerIn: parent
-            color: Color.colors.on_primary
-            font.pixelSize: Variable.font.pixelSize.huge
-        }
         radius: 100
+        Loader {
+            id: iconLoader
+            anchors.fill: parent
+            sourceComponent: hasImage ? imageComponent : hasAppIcon ? appIconComponent : emptyComponent
+        }
     }
 
     Component {
@@ -54,11 +52,16 @@ Item {
     Component {
         id: emptyComponent
         Rectangle {
-            id: empty
-            Layout.preferredWidth: Variable.sizes.notificationAppIconSize
-            Layout.preferredHeight: Variable.sizes.notificationAppIconSize
-            Layout.alignment: Qt.AlignVCenter
-            color: Color.colors.surface_container_high
+            width: Variable.sizes.notificationAppIconSize
+            height: Variable.sizes.notificationAppIconSize
+            color: "transparent"
+            LucideIcon {
+                id: icon
+                icon: "message-circle"
+                color: Color.colors.on_primary
+                font.pixelSize: Variable.font.pixelSize.huge
+                anchors.centerIn: parent
+            }
         }
     }
 }

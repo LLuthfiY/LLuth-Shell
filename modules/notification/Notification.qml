@@ -45,10 +45,7 @@ Scope {
         ListView {
             id: listview
             spacing: 8
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-            }
+            anchors.fill: parent
             anchors.margins: 0
 
             model: ScriptModel {
