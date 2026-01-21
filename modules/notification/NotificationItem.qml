@@ -68,14 +68,12 @@ Item {
             Layout.fillWidth: true
             Layout.margins: 16
 
-            Image {
-                id: icon
-                source: notificationObject.image
-                Layout.preferredWidth: 64
-                Layout.preferredHeight: 64
-                Layout.alignment: Qt.AlignVCenter
+            NotificationAppIcon {
+                id: appIcon
+                notificationObject: root.notificationObject
+                Layout.preferredWidth: Variable.sizes.notificationAppIconSize
+                Layout.preferredHeight: Variable.sizes.notificationAppIconSize
             }
-
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter

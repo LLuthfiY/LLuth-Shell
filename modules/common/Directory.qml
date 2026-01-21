@@ -26,6 +26,8 @@ Singleton {
     readonly property string music: StandardPaths.standardLocations(StandardPaths.MusicLocation)[0]
     readonly property string videos: StandardPaths.standardLocations(StandardPaths.MoviesLocation)[0]
 
+    readonly property string shell: StandardPaths.standardLocations(StandardPaths.GenericDataLocation)[0] + "/LLuth-Shell"
+
     readonly property string configFile: config + "/LLuth-Shell/config.json"
     readonly property string colorFile: config + "/scripts/colorscheme/output/colors.json"
     readonly property string notificationsPath: trimFileProtocol(`${Directory.cache}/notifications/notifications.json`)

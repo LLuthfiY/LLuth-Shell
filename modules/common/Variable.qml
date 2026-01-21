@@ -2,6 +2,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import qs.modules.common
 import qs.modules.common.functions
 
@@ -10,14 +11,26 @@ Singleton {
     property QtObject sizes
     property QtObject font
 
+    FontLoader {
+        id: lucide
+        source: Directory.shell + "/assets/fonts/lucide.ttf"
+    }
+    FileView {
+        id: lucideJsonFile
+        path: Directory.shell + "/assets/fonts/lucide.json"
+        blockLoading: true
+    }
+    readonly property var lucideJson: JSON.parse(lucideJsonFile.text())
+
     sizes: QtObject {
         property int notificationPopupWidth: 400
+        property int notificationAppIconSize: 48
     }
     font: QtObject {
         property QtObject family: QtObject {
-            property string main: "Open Sans"
-            property string title: "Open Sans"
-            property string iconMaterial: "Material Symbols Rounded"
+            property string main: lucide.font.family
+            property string title: lucide.font.family
+            property string iconLucide: lucide.font.family
             property string iconNerd: "CaskaydiaCove NFP"
             property string monospace: "CaskaydiaMono NFP"
             property string reading: "Readex Pro"
