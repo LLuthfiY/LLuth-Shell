@@ -12,6 +12,7 @@ import qs.modules.common.functions
 import qs.modules.common.widgets
 import qs.modules.osd
 import qs.modules.overview
+import qs.modules.mediaPlayer
 
 ShellRoot {
 
@@ -47,5 +48,10 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && GlobalState.overviewOpen
         component: Overview {}
+    }
+
+    LazyLoader {
+        active: Config.ready && Config.options.mediaPlayer.enable
+        component: MediaPlayer {}
     }
 }
