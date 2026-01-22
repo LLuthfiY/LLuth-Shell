@@ -28,8 +28,7 @@ Singleton {
     }
     font: QtObject {
         property QtObject family: QtObject {
-            property string main: lucide.font.family
-            property string title: lucide.font.family
+            property string main: "Open Sans"
             property string iconLucide: lucide.font.family
         }
         property QtObject pixelSize: QtObject {

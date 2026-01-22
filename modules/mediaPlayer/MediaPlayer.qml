@@ -148,7 +148,7 @@ Scope {
                             elide: Text.ElideRight
                             font.pixelSize: 16
                             Layout.maximumWidth: 340
-
+                            font.family: Variable.font.family.main
                             font.weight: Font.Medium
                             color: Color.colors.on_surface
                             onTextChanged: {
@@ -163,6 +163,7 @@ Scope {
                             text: modelData.trackArtist
                             elide: Text.ElideRight
                             font.pixelSize: 12
+                            font.family: Variable.font.family.main
                             Layout.maximumWidth: 340
 
                             font.weight: Font.Medium

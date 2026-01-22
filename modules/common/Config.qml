@@ -88,7 +88,7 @@ Singleton {
                 property string background: "surface"
                 property string borderColor: "primary"
                 property bool fullWidth: false
-                property int border: 6
+                property int border: 2
                 property bool borderScreen: false
                 property int width: 800
                 property int margin: 0
@@ -98,20 +98,36 @@ Singleton {
                 property list<string> centerWidgets: []
             }
 
+            property JsonObject dashboard: JsonObject {
+                property list<string> widgets: ["PowerAndSetting.qml"]
+            }
+
+            property JsonObject modules: JsonObject {
+                property list<string> enabled: []
+                property bool bar: true
+                property bool background: true
+                property bool dashboard: true
+                property bool mediaPlayer: true
+                property bool notification: true
+                property bool osd: true
+                property bool overview: true
+                property bool popupCloser: true
+            }
+
             property JsonObject windowManager: JsonObject {
                 property int workspaces: 8
                 property int gapsOut: 16
                 property int gapsIn: 8
                 property real activeOpacity: 1
                 property real inactiveOpacity: 0.8
-                property int windowBorderSize: 4
+                property int windowBorderSize: 0
                 property int windowBorderRadius: 16
             }
             property JsonObject notification: JsonObject {
-                property string position: "bottomRight"
+                property string position: "topRight"
             }
             property JsonObject mediaPlayer: JsonObject {
-                property bool enable: true
+                property bool enable: false
             }
             property JsonObject interactions: JsonObject {
                 property JsonObject scrolling: JsonObject {

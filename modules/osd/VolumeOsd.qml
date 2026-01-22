@@ -72,8 +72,8 @@ Scope {
                 lineWidth: 8
                 implicitSize: 100
                 value: Pipewire.defaultAudioSink?.audio.volume ?? 0
-                inside: Text {
-                    text: root.muted ? "" : root.percentage > 50 ? "" : root.percentage > 0 ? "" : ""
+                inside: LucideIcon {
+                    icon: root.muted ? "volume-off" : root.percentage > 50 ? "volume-2" : root.percentage > 0 ? "volume-1" : "volume-x"
                     font.pixelSize: 48
                     color: Color.colors.primary
                 }
