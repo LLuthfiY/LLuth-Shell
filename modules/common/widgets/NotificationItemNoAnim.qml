@@ -98,28 +98,29 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
+                clip: true
 
-                Label {
+                Text {
                     id: summary
                     text: notificationObject.summary
-                    Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: 12
+                    font.pixelSize: 12
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
                     clip: true
+                    wrapMode: Text.Wrap
+                    Layout.preferredWidth: 200
                 }
 
-                Label {
+                Text {
                     id: body
                     text: notificationObject.body
-                    Layout.preferredWidth: parent.width - 64
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: 10
+                    font.pixelSize: 12
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
-                    wrapMode: Text.WordWrap
+                    wrapMode: Text.Wrap
                 }
 
                 // Loader {

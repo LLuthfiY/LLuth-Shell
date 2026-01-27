@@ -136,10 +136,13 @@ Item {
                     text: notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: 12
+                    font.pixelSize: 16
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
+                    clip: true
+                    Layout.preferredWidth: 250
+                    wrapMode: Text.Wrap
                 }
 
                 Label {
@@ -147,10 +150,10 @@ Item {
                     text: notificationObject.body
                     Layout.preferredWidth: parent.width
                     Layout.alignment: Qt.AlignVCenter
-                    font.pointSize: 10
+                    font.pixelSize: 16
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
-                    wrapMode: Text.WordWrap
+                    wrapMode: Text.Wrap
                 }
 
                 // Loader {
