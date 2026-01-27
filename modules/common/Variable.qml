@@ -27,6 +27,7 @@ Singleton {
     sizes: QtObject {
         property int notificationPopupWidth: 400
         property int notificationAppIconSize: 48
+        property int dashboardWidth: 400
     }
     font: QtObject {
         property QtObject family: QtObject {

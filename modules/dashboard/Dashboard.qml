@@ -22,7 +22,7 @@ Scope {
         WlrLayershell.layer: WlrLayer.Overlay
         // exclusiveZone: 0
         exclusionMode: ExclusionMode.Ignore
-        implicitWidth: 400
+        implicitWidth: Variable.sizes.dashboardWidth
         anchors.top: true
         anchors.right: true
         anchors.bottom: true
@@ -40,14 +40,18 @@ Scope {
                 ColumnLayout {
                     spacing: Variable.margin.normal
                     width: parent.width
+                    height: parent.height
                     Repeater {
                         model: Config.options.dashboard.widgets
                         delegate: Loader {
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignTop
-                            Layout.fillHeight: modelData.contains("---fill")
+                            Layout.fillHeight: modelData.includes("--fill--")
+                            Component.onCompleted: {
+                                console.log(Layout.fillHeight);
+                            }
                             property string folder: modelData.startsWith("user--") ? "widget/user/" : "widget/"
-                            source: folder + modelData.replace("user--", "").replace("---fill", "")
+                            source: folder + modelData.replace("user--", "").replace("--fill--", "")
                         }
                     }
                 }
