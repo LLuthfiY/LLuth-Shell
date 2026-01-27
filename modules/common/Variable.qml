@@ -10,6 +10,8 @@ Singleton {
     id: root
     property QtObject sizes
     property QtObject font
+    property QtObject margin
+    property QtObject radius
 
     FontLoader {
         id: lucide
@@ -42,5 +44,25 @@ Singleton {
             property int hugeass: 23
             property int title: huge
         }
+    }
+
+    margin: QtObject {
+        property int smallest: 4
+        property int small: 8
+        property int normal: 16
+        property int large: 24
+        property int larger: 32
+        property int huge: 48
+        property int hugeass: 64
+    }
+
+    radius: QtObject {
+        property int smallest: 4
+        property int small: 8
+        property int normal: 16
+        property int large: 24
+        property int larger: 32
+        property int huge: 48
+        property int hugeass: 64
     }
 }

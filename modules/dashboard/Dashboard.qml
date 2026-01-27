@@ -31,16 +31,22 @@ Scope {
             anchors.fill: parent
             anchors.margins: Config.options.windowManager.gapsOut + Config.options.bar.margin
             color: Color.colors.surface
-            radius: 16
-            ColumnLayout {
+            radius: Variable.radius.normal
+            Rectangle {
                 anchors.fill: parent
-                anchors.margins: 16
-                spacing: 16
-                Repeater {
-                    Layout.alignment: Qt.AlignTop
-                    model: Config.options.dashboard.widgets
-                    Loader {
-                        source: "widget/" + modelData
+                anchors.margins: Variable.margin.normal
+                color: "transparent"
+                clip: true
+                ColumnLayout {
+                    spacing: Variable.margin.normal
+                    width: parent.width
+                    Repeater {
+                        model: Config.options.dashboard.widgets
+                        delegate: Loader {
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignTop
+                            source: "widget/" + modelData
+                        }
                     }
                 }
             }

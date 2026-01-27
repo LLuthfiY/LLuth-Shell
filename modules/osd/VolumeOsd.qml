@@ -60,7 +60,7 @@ Scope {
             color: "transparent"
             Rectangle {
                 anchors.fill: parent
-                radius: 24
+                radius: Variable.radius.larger
                 color: Color.colors.surface
             }
             // An empty click mask prevents the window from blocking mouse events.

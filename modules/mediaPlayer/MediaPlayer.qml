@@ -63,7 +63,7 @@ Scope {
                         maskSource: Rectangle {
                             width: waveSpectrum.width
                             height: waveSpectrum.height
-                            radius: 16
+                            radius: Variable.radius.normal
                         }
                     }
                 }
@@ -89,7 +89,7 @@ Scope {
                         id: art
                         width: 92
                         height: 92
-                        radius: 16
+                        radius: Variable.radius.normal
                         Image {
                             anchors.fill: parent
                             source: modelData.trackArtUrl
@@ -99,7 +99,7 @@ Scope {
                                 maskSource: Rectangle {
                                     width: art.width
                                     height: art.height
-                                    radius: 16
+                                    radius: Variable.radius.normal
                                 }
                             }
                             MouseArea {
@@ -119,7 +119,7 @@ Scope {
                                 Rectangle {
                                     anchors.fill: parent
                                     color: artMouseArea.isHovered ? ColorUtils.transparentize(Color.colors.surface, 0.5) : "transparent"
-                                    radius: 16
+                                    radius: Variable.radius.normal
                                     Behavior on color {
                                         ColorAnimation {
                                             duration: 200
@@ -244,7 +244,7 @@ Scope {
                                 implicitWidth: 32
                                 implicitHeight: 32
                                 visible: modelData.canPlay
-                                radius: 12
+                                radius: Variable.radius.small
                                 property bool isHovered: false
                                 color: isHovered ? Color.colors.primary : Color.colors.primary_container
                                 Behavior on color {
@@ -362,7 +362,7 @@ Scope {
                         //     background: Rectangle {
                         //         color: "transparent"
                         //         height: 4
-                        //         radius: 16
+                        //         radius: Variable.radius.normal
                         //         anchors.verticalCenter: parent.verticalCenter
                         //
                         //         Rectangle {
@@ -379,7 +379,7 @@ Scope {
                         //             color: Color.colors.primary_container
                         //             width: parent.width - activeProgress.width - 20
                         //             height: 4
-                        //             radius: 16
+                        //             radius: Variable.radius.normal
                         //             anchors.verticalCenter: parent.verticalCenter
                         //             anchors.right: parent.right
                         //         }

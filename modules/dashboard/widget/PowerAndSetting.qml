@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import Quickshell
 import Quickshell.Io
 
@@ -18,7 +18,7 @@ RowLayout {
             id: powerButton
             implicitWidth: 32
             implicitHeight: 32
-            radius: 12
+            radius: Variable.radius.small
             property bool isHovered: false
             color: isHovered ? Color.colors.primary : Color.colors.primary_container
             Behavior on color {
@@ -42,11 +42,179 @@ RowLayout {
                     powerButton.isHovered = false;
                 }
                 onClicked: {
-                    powerMenu.popup();
+                    powerMenu.open();
                 }
             }
             Menu {
                 id: powerMenu
+                padding: 8
+                implicitWidth: 200
+                background: Rectangle {
+                    id: backgroundMenu
+                    radius: 12
+                    property bool isHovered: false
+                    color: Color.colors.surface_container
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        onEntered: {
+                            backgroundMenu.isHovered = true;
+                        }
+                        onExited: {
+                            backgroundMenu.isHovered = false;
+                        }
+                    }
+                }
+
+                Instantiator {
+                    model: [
+                        {
+                            "icon": "power",
+                            "text": "Power Off",
+                            "action": function () {
+                                Quickshell.execDetached(["systemctl", "poweroff"]);
+                            }
+                        },
+                        {
+                            "icon": "rotate-ccw",
+                            "text": "Restart",
+                            "action": function () {
+                                Quickshell.execDetached(["systemctl", "reboot"]);
+                            }
+                        },
+                        {
+                            "icon": "moon",
+                            "text": "Suspend",
+                            "action": function () {
+                                Quickshell.execDetached(["systemctl", "suspend"]);
+                            }
+                        },
+                        {
+                            "icon": "log-out",
+                            "text": "Logout",
+                            "action": function () {
+                                Quickshell.execDetached(["hyprctl", "dispatch", "exit"]);
+                            }
+                        },
+                        {
+                            "icon": "lock",
+                            "text": "Lock",
+                            "action": function () {
+                                Quickshell.execDetached(["hyprlock"]);
+                            }
+                        }
+                    ]
+
+                    onObjectAdded: function (index, item) {
+                        powerMenu.addItem(item);
+                    }
+
+                    onObjectRemoved: function (index, item) {
+                        powerMenu.removeItem(item);
+                    }
+
+                    delegate: MenuItem {
+                        text: modelData.text
+                        background: Rectangle {
+                            radius: 8
+                            property bool isHovered: false
+                            color: isHovered ? Color.colors.primary : "transparent"
+                            Behavior on color {
+                                ColorAnimation {
+                                    duration: 200
+                                }
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: {
+                                    background.isHovered = true;
+                                }
+                                onExited: {
+                                    background.isHovered = false;
+                                }
+                            }
+                        }
+                        contentItem: LucideIcon {
+                            icon: modelData.icon
+                            label: modelData.text
+                            color: background.isHovered ? Color.colors.on_primary : Color.colors.primary
+                        }
+                        onTriggered: modelData.action()
+                    }
+                }
+            }
+        }
+        Rectangle {
+            id: settingsButton
+            implicitWidth: 32
+            implicitHeight: 32
+            radius: Variable.radius.small
+            property bool isHovered: false
+            color: isHovered ? Color.colors.primary : Color.colors.primary_container
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
+            LucideIcon {
+                id: settingsIcon
+                anchors.centerIn: parent
+                icon: "settings"
+                color: settingsButton.isHovered ? Color.colors.on_primary : Color.colors.primary
+            }
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: {
+                    settingsButton.isHovered = true;
+                }
+                onExited: {
+                    settingsButton.isHovered = false;
+                }
+                onClicked: {}
+            }
+        }
+        Item {
+            Layout.fillWidth: true
+        }
+        Text {
+            id: timeText
+            // text: Qt.formatTime(systemClock.date, "hh:mm  ")
+            text: root.uptime
+            color: Color.colors.on_surface ?? "#FFFFFF"
+            Layout.alignment: Qt.AlignRight
+            horizontalAlignment: Text.AlignRight
+            font.weight: 900
+        }
+
+        SystemClock {
+            id: systemClock
+            precision: SystemClock.Minutes
+        }
+
+        Timer {
+            id: uptimeTimer
+            running: true
+            interval: 30000
+            repeat: true
+            triggeredOnStart: true
+            onTriggered: {
+                uptimeProcess.running = true;
+            }
+        }
+        Process {
+            id: uptimeProcess
+            command: ["uptime", "-p"]
+            stdout: StdioCollector {
+                onStreamFinished: {
+                    root.uptime = this.text.replace("up", "").replace(",", "").replace(" day", "d").replace(" hour", "h").replace(" minute", "m").trim() + "  ";
+                }
             }
         }
     }

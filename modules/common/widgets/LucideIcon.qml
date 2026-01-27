@@ -7,7 +7,10 @@ import qs.modules.common
 Text {
     id: root
     required property string icon
+    property string label: ""
     font.family: Variable.font.family.iconLucide
     renderType: Text.QtRendering
-    text: String.fromCharCode(parseInt(Variable.lucideJson[icon].encodedCode.slice(1), 16))
+    property string iconSymbol: String.fromCharCode(parseInt(Variable.lucideJson[icon].encodedCode.slice(1), 16))
+    // text: String.fromCharCode(parseInt(Variable.lucideJson[icon].encodedCode.slice(1), 16))
+    text: label !== "" ? iconSymbol + " " + label : iconSymbol
 }
