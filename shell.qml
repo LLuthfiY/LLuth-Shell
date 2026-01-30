@@ -15,6 +15,7 @@ import qs.modules.overview
 import qs.modules.mediaPlayer
 import qs.modules.popupCloser
 import qs.modules.dashboard
+import qs.modules.setting
 
 ShellRoot {
 
@@ -65,5 +66,10 @@ ShellRoot {
     LazyLoader {
         active: Config.ready && (GlobalState.launcherOpen || GlobalState.dashboardOpen || GlobalState.overviewOpen)
         component: PopupCloser {}
+    }
+
+    LazyLoader {
+        active: Config.ready && GlobalState.settingsOpen
+        component: Setting {}
     }
 }

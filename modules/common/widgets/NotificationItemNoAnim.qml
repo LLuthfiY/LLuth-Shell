@@ -28,7 +28,7 @@ Item {
 
     ColumnLayout {
         id: content
-        spacing: 0
+        spacing: 8
         Rectangle {
             id: appNameBackground
 
@@ -86,7 +86,8 @@ Item {
         RowLayout {
             spacing: 16
             Layout.fillWidth: true
-            Layout.margins: 16
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
 
             NotificationAppIcon {
                 id: appIcon
@@ -121,6 +122,7 @@ Item {
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
                     wrapMode: Text.Wrap
+                    Layout.preferredWidth: 200
                 }
 
                 // Loader {

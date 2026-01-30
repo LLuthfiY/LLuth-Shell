@@ -177,7 +177,10 @@ RowLayout {
                 onExited: {
                     settingsButton.isHovered = false;
                 }
-                onClicked: {}
+                onClicked: {
+                    GlobalState.settingsOpen = true;
+                    GlobalState.dashboardOpen = false;
+                }
             }
         }
         Item {

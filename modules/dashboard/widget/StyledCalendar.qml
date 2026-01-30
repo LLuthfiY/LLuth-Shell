@@ -322,7 +322,7 @@ GridLayout {
                 color: isCurrent ? Color.colors.primary : "transparent"
                 Text {
                     text: model.day
-                    font.pixelSize: 12
+                    font.pixelSize: 16
                     color: parent.isCurrent ? Color.colors.on_primary : Color.colors.on_surface
                     anchors.centerIn: parent
                 }
