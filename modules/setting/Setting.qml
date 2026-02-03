@@ -81,7 +81,8 @@ Scope {
                                 anchors.left: parent.left
                                 anchors.margins: 8
                                 label: modelData.text
-                                font.weight: Font.Bold
+                                font.weight: Font.Normal
+                                font.family: Variable.font.family.main
                             }
                             MouseArea {
                                 anchors.fill: parent

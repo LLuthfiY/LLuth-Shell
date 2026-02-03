@@ -86,6 +86,8 @@ ListView {
                         icon: "image"
                         color: Color.colors.on_surface
                         anchors.centerIn: parent
+                        font.weight: Font.Normal
+                        font.family: Variable.font.family.main
                         label: "Select Wallpaper"
                     }
                     FileDialog {
@@ -117,6 +119,8 @@ ListView {
                     color: !Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
                     anchors.centerIn: parent
                     label: "Light Mode"
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -147,6 +151,8 @@ ListView {
                     color: Config.options.appearance.darkMode ? Color.colors.on_primary : Color.colors.on_surface
                     anchors.centerIn: parent
                     label: "Dark Mode"
+                    font.weight: Font.Normal
+                    font.family: Variable.font.family.main
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -164,6 +170,14 @@ ListView {
                     }
                 }
             }
+        }
+        LucideIcon {
+            icon: "palette"
+            color: Color.colors.on_surface
+            font.pixelSize: Variable.font.pixelSize.small
+            font.weight: Font.Bold
+            font.family: Variable.font.fontFamily.main
+            label: "Palette"
         }
         Flow {
             Layout.preferredWidth: parent.width
