@@ -109,6 +109,7 @@ Singleton {
                 property real inactiveOpacity: 0.8
                 property int windowBorderSize: 0
                 property int windowBorderRadius: 16
+                property int applyConfigDelay: 1000
             }
             property JsonObject notification: JsonObject {
                 property string position: "topRight"

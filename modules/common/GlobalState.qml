@@ -60,4 +60,12 @@ Singleton {
             overviewOpen = !overviewOpen;
         }
     }
+
+    IpcHandler {
+        target: "setupWindowManager"
+
+        function setup() {
+            WindowManagerUtils.setBatch();
+        }
+    }
 }

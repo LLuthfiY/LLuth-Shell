@@ -33,7 +33,7 @@ Singleton {
 
     Timer {
         id: wmTimer
-        interval: 200
+        interval: Config.options.windowManager.applyConfigDelay
         repeat: false
         onTriggered: {
             setBatch();

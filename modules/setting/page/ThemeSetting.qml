@@ -98,7 +98,6 @@ ListView {
                         onAccepted: {
                             Config.options.background.wallpaperPath = selectedFile;
                             root.setTheme();
-                            WindowManagerUtils.setWM();
                         }
                     }
                 }
@@ -134,7 +133,6 @@ ListView {
                     onClicked: {
                         Config.options.appearance.darkMode = false;
                         root.setTheme();
-                        WindowManagerUtils.setWM();
                     }
                 }
             }
@@ -166,7 +164,6 @@ ListView {
                     onClicked: {
                         Config.options.appearance.darkMode = true;
                         root.setTheme();
-                        WindowManagerUtils.setWM();
                     }
                 }
             }
@@ -202,7 +199,6 @@ ListView {
                         onClicked: {
                             Config.options.appearance.palette.type = modelData;
                             root.setTheme();
-                            WindowManagerUtils.setWM();
                         }
                     }
                     Text {
