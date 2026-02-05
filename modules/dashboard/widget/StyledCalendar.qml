@@ -255,6 +255,7 @@ GridLayout {
                     font.pixelSize: 14
                     color: Color.colors.on_surface
                     font.weight: Font.Bold
+                    font.family: Variable.font.family.main
                     anchors.centerIn: parent
                 }
             }
@@ -264,10 +265,9 @@ GridLayout {
         height: root.size
         Layout.column: 0
         Layout.row: 2
-
         implicitWidth: root.size
-        implicitHeight: dayOfWeekRow.implicitWidth
-        Layout.preferredHeight: dayOfWeekRow.implicitWidth
+        implicitHeight: dayOfWeekRow.implicitWidth * 6 / 7
+        Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
         color: "transparent"
         clip: true
         WeekNumberColumn {
@@ -287,6 +287,7 @@ GridLayout {
                 Text {
                     text: model.weekNumber
                     font.pixelSize: 14
+                    font.family: Variable.font.family.main
                     color: Color.colors.on_surface
                     anchors.centerIn: parent
                 }
@@ -295,22 +296,18 @@ GridLayout {
     }
     Rectangle {
         implicitWidth: dayOfWeekRow.implicitWidth
-        implicitHeight: weekNumberColumn.implicitWidth
+        implicitHeight: weekNumberColumn.parent.implicitHeight
         color: Color.colors.primary_container
         radius: Variable.radius.small
         Layout.column: 1
         Layout.row: 2
         Layout.fillWidth: true
-        Layout.fillHeight: true
 
         MonthGrid {
             id: monthGrid
             locale: Qt.locale("en_US")
             anchors.fill: parent
-            anchors.leftMargin: 8
-            anchors.rightMargin: 8
-            anchors.topMargin: 8
-            anchors.bottomMargin: 8
+            anchors.margins: 8
             month: root.date.getMonth()
             year: root.date.getFullYear()
 
@@ -319,11 +316,14 @@ GridLayout {
                 height: root.size
                 radius: Variable.radius.small
                 property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
+                property bool sameMonth: model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                 color: isCurrent ? Color.colors.primary : "transparent"
                 Text {
                     text: model.day
-                    font.pixelSize: 16
-                    color: parent.isCurrent ? Color.colors.on_primary : Color.colors.on_surface
+                    font.pixelSize: 14
+                    color: parent.isCurrent ? Color.colors.on_primary : parent.sameMonth ? Color.colors.on_surface : "#77" + Color.colors.on_surface.slice(1)
+                    font.weight: Font.Bold
+                    font.family: Variable.font.family.main
                     anchors.centerIn: parent
                 }
             }

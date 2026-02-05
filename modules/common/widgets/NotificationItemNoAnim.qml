@@ -45,7 +45,7 @@ Item {
                 id: appName
                 text: notificationObject.appName ?? "System"
                 color: Color.colors.on_surface
-                font.pointSize: 12
+                font.pixelSize: 12
                 font.family: Variable.font.family.main
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
@@ -61,6 +61,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.margins: 8
+                anchors.verticalCenter: parent.verticalCenter
 
                 LucideIcon {
                     id: closeIcon

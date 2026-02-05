@@ -60,7 +60,7 @@ Item {
 
     ColumnLayout {
         id: content
-        spacing: 0
+        spacing: 8
         Rectangle {
             id: appNameBackground
 
@@ -76,7 +76,7 @@ Item {
                 id: appName
                 text: notificationObject.appName ?? "System"
                 color: Color.colors.on_surface
-                font.pointSize: 12
+                font.pixelSize: 12
                 font.family: Variable.font.family.main
                 font.bold: true
                 anchors.verticalCenter: parent.verticalCenter
@@ -92,6 +92,7 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.margins: 8
+                anchors.verticalCenter: parent.verticalCenter
 
                 LucideIcon {
                     id: closeIcon
@@ -118,7 +119,8 @@ Item {
         RowLayout {
             spacing: 16
             Layout.fillWidth: true
-            Layout.margins: 16
+            Layout.leftMargin: 16
+            Layout.rightMargin: 16
 
             NotificationAppIcon {
                 id: appIcon
@@ -136,7 +138,7 @@ Item {
                     text: notificationObject.summary
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: 16
+                    font.pixelSize: 12
                     font.family: Variable.font.family.main
                     font.bold: true
                     color: Color.colors.on_surface
@@ -150,7 +152,7 @@ Item {
                     text: notificationObject.body
                     Layout.preferredWidth: parent.width
                     Layout.alignment: Qt.AlignVCenter
-                    font.pixelSize: 16
+                    font.pixelSize: 12
                     font.family: Variable.font.family.main
                     color: Color.colors.on_surface_variant
                     wrapMode: Text.Wrap
