@@ -117,6 +117,7 @@ Scope {
                     ThemeSetting {}
                     BarSetting {}
                     DashboardSetting {}
+                    WindowManagerSetting {}
                 }
             }
         }

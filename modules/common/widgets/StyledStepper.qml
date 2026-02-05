@@ -6,10 +6,10 @@ import qs.modules.common
 
 Rectangle {
     id: root
-    property int value: 0
-    property int min: -100000
-    property int max: 100000
-    property int step: 1
+    property real value: 0
+    property real min: -100000
+    property real max: 100000
+    property real step: 1
     property bool editable: true
 
     color: Color.colors.surface_container
@@ -37,7 +37,7 @@ Rectangle {
                     minusButton.hovered = false;
                 }
                 onClicked: {
-                    root.value = Math.max(root.value - root.step, root.min);
+                    root.value = Math.max((root.value - root.step).toFixed(10), root.min);
                 }
             }
             LucideIcon {
@@ -81,7 +81,7 @@ Rectangle {
                     plusButton.hovered = false;
                 }
                 onClicked: {
-                    root.value = Math.min(root.value + root.step, root.max);
+                    root.value = Math.min((root.value + root.step).toFixed(10), root.max);
                 }
             }
             LucideIcon {
