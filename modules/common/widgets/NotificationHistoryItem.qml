@@ -17,6 +17,7 @@ Item {
     property bool pendingClose: notificationObject.pendingClose
     width: parent.width
     implicitHeight: content.implicitHeight
+    clip: true
 
     Rectangle {
         id: background
@@ -24,6 +25,25 @@ Item {
         color: Color.colors.surface_container_high
 
         radius: 16
+    }
+    Behavior on opacity {
+        OpacityAnimator {
+            duration: 200
+        }
+    }
+
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 200
+        }
+    }
+
+    Timer {
+        id: closeTimer
+        interval: 210
+        onTriggered: {
+            Notification.discardNotification(notificationObject.notificationId);
+        }
     }
 
     ColumnLayout {
@@ -78,7 +98,9 @@ Item {
                         if (root.notificationObject.popup) {
                             Notification.timeoutNotification(notificationObject.notificationId);
                         } else {
-                            Notification.discardNotification(notificationObject.notificationId);
+                            root.opacity = 0;
+                            root.implicitHeight = 0;
+                            closeTimer.start();
                         }
                     }
                 }

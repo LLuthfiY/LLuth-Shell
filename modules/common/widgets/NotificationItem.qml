@@ -17,6 +17,7 @@ Item {
     property bool pendingClose: notificationObject.pendingClose
     width: Variable.sizes.notificationPopupWidth
     implicitHeight: 0
+    clip: true
 
     opacity: 0
     onPendingCloseChanged: {
@@ -46,7 +47,6 @@ Item {
     Behavior on implicitHeight {
         NumberAnimation {
             duration: 200
-            easing.type: Easing.OutBack
         }
     }
 

@@ -77,7 +77,7 @@ ColumnLayout {
             }
             listView.lastY = listView.contentY - listView.originY;
         }
-        delegate: NotificationItemNoAnim {
+        delegate: NotificationHistoryItem {
             notificationObject: modelData
         }
     }
