@@ -262,12 +262,11 @@ GridLayout {
         }
     }
     Rectangle {
-        height: root.size
         Layout.column: 0
         Layout.row: 2
-        implicitWidth: root.size
-        implicitHeight: dayOfWeekRow.implicitWidth * 6 / 7
-        Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
+        width: root.size
+        height: dayOfWeekRow.implicitWidth + 16
+        // Layout.preferredHeight: dayOfWeekRow.implicitWidth * 6 / 7
         color: "transparent"
         clip: true
         WeekNumberColumn {
@@ -296,7 +295,7 @@ GridLayout {
     }
     Rectangle {
         implicitWidth: dayOfWeekRow.implicitWidth
-        implicitHeight: weekNumberColumn.parent.implicitHeight
+        height: weekNumberColumn.parent.height
         color: Color.colors.primary_container
         radius: Variable.radius.small
         Layout.column: 1

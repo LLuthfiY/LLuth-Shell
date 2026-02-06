@@ -48,7 +48,7 @@ ColumnLayout {
                 wl = wl.filter(item => item !== "");
                 wl = wl.forEach(item => {
                     const filename = item.split("/").pop();
-                    root.widgetList.push("user---" + filename);
+                    root.widgetList.push("user--" + filename);
                 });
                 wlm.open();
             }
