@@ -41,6 +41,7 @@ Scope {
                 ColumnLayout {
                     width: parent.width
                     height: parent.height
+                    spacing: 0
                     Repeater {
                         model: Config.options.dashboard.widgets
                         delegate: Loader {
