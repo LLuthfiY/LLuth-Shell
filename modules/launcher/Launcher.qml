@@ -13,10 +13,14 @@ import qs.services
 
 Scope {
     id: root
-    property var application: ScriptModel {
-        values: AppSearch.fuzzyQuery(searchInput.text)
-        // values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
-    }
+    // property var application: ScriptModel {
+    //     values: AppSearch.fuzzyQuery(searchInput.text)
+    //     // values: searchInput.text != "" ? DesktopEntries.applications.values.filter(app => app.name.toLowerCase().includes(searchInput.text.toLowerCase())).sort((a, b) => a.name.localeCompare(b.name)).sort((a, b) => a.name.toLowerCase().indexOf(searchInput.text.toLowerCase()) - b.name.toLowerCase().indexOf(searchInput.text.toLowerCase())) : DesktopEntries.applications.values.filter(a => true).sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+    // }
+    property var application: AppSearch.fuzzyQuery(searchInput.text)
+    // onApplicationChanged: {
+    //     launcherList.currentIndex = 0
+    // }
     PanelWindow {
         id: launcherWindow
         screen: Quickshell.screens.find(s => s.name === Hyprland.focusedMonitor?.name) ?? null
@@ -69,9 +73,9 @@ Scope {
                         launcherList.currentItem.execute();
                         GlobalState.launcherOpen = false;
                     }
-                    onTextChanged: {
-                        launcherList.currentIndex = 0;
-                    }
+                    // onTextChanged: {
+                    //     launcherList.currentIndex = 0;
+                    // }
                     Keys.onPressed: {
                         if (event.key === Qt.Key_Escape) {
                             GlobalState.launcherOpen = false;
@@ -102,8 +106,9 @@ Scope {
                 delegate: Rectangle {
                     id: appDelegate
                     required property DesktopEntry modelData
+                    required property int index
                     property bool hovered: false
-                    color: ListView.isCurrentItem || hovered ? ColorUtils.transparentize(Color.colors.primary, 0.5) : Color.colors.surface
+                    color: "transparent"
                     height: row.height
                     width: parent?.parent.width ?? 0
                     radius: 8
@@ -115,6 +120,18 @@ Scope {
                             modelData.execute();
                         }
                     }
+                    Rectangle {
+                        anchors.left: parent.left
+                        width: 2
+                        height: parent.height / 2
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: launcherList.currentIndex === index || parent.hovered ? Color.colors.primary : "transparent"
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     RowLayout {
                         id: row
                         spacing: 0
@@ -123,6 +140,7 @@ Scope {
 
                         IconImage {
                             Layout.margins: 8
+                            Layout.leftMargin: 16
                             Layout.fillHeight: true
                             Layout.preferredWidth: 32
                             source: Quickshell.iconPath(appDelegate.modelData.icon, "image-missing")
@@ -130,6 +148,9 @@ Scope {
                         Text {
                             text: appDelegate.modelData.name
                             Layout.fillWidth: true
+                            Layout.leftMargin: 8
+                            font.family: Variable.font.family.main
+                            font.weight: Font.Normal
                             color: ListView.isCurrentItem ? Color.colors.on_primary : Color.colors.on_surface
                         }
                     }
