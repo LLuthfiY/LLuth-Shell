@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import QtQuick.Layouts
 
 import Quickshell
@@ -12,6 +12,7 @@ ColumnLayout {
     required property var items
     required property string path
     property list<string> widgetList: []
+    property list<string> excludedWidgetList: []
     Rectangle {
         color: Color.colors.surface_container
         anchors.fill: parent
@@ -31,8 +32,7 @@ ColumnLayout {
                     return filename;
                 });
                 wl = wl.filter(item => {
-                    console.log(item, item !== "CustomTrayMenu.qml" && item !== "DynamicLayout.qml");
-                    return item !== "CustomTrayMenu.qml" && item !== "DynamicLayout.qml";
+                    return !(root.excludedWidgetList.includes(item));
                 });
                 root.widgetList = wl;
                 getUserWidgets.running = true;
@@ -90,7 +90,8 @@ ColumnLayout {
             }
             Menu {
                 id: wlm
-                implicitWidth: 200
+                padding: 8
+                width: 200
                 background: Rectangle {
                     id: backgroundMenu
                     radius: 12
@@ -125,13 +126,15 @@ ColumnLayout {
                                 }
                             }
                         }
-                        contentItem: RowLayout {
-                            Text {
-                                Layout.fillWidth: true
-                                text: modelData.replace("user--", "")
-                                color: background.isHovered ? Color.colors.on_primary : Color.colors.primary
-                            }
+                        contentItem: Text {
+                            Layout.fillWidth: true
+                            font.family: Variable.font.family.main
+                            font.weight: Font.Normal
+                            font.pixelSize: Variable.font.pixelSize.smaller
+                            text: modelData.replace("user--", "")
+                            color: background.isHovered ? Color.colors.on_primary : Color.colors.on_surface
                         }
+
                         onTriggered: {
                             root.items.push(modelData);
                             root.itemsChanged();
