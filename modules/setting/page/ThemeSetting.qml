@@ -71,7 +71,7 @@ Flickable {
                     width: selectWallpaperIcon.width + 16
                     height: selectWallpaperIcon.height + 8
                     property bool hovered: false
-                    color: hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: hovered ? Color.colors.primary : Color.colors.surface
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
@@ -93,7 +93,7 @@ Flickable {
                     LucideIcon {
                         id: selectWallpaperIcon
                         icon: "image"
-                        color: Color.colors.on_surface
+                        color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
                         anchors.centerIn: parent
                         font.weight: Font.Normal
                         font.family: Variable.font.family.main
@@ -120,7 +120,24 @@ Flickable {
                 width: lightModeIcon.width + 16
                 height: lightModeIcon.height + 8
                 radius: Variable.radius.small
-                color: !Config.options.appearance.darkMode ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                color: "transparent"
+                Rectangle {
+                    width: !Config.options.appearance.darkMode ? parent.width : parent.hovered ? parent.width : 2
+                    height: parent.height
+                    radius: Variable.radius.smallest
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: !Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
+                }
                 LucideIcon {
                     id: lightModeIcon
                     icon: "sun"
@@ -144,6 +161,11 @@ Flickable {
                         root.setTheme();
                     }
                 }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
             }
             Rectangle {
                 id: darkModeButton
@@ -151,7 +173,24 @@ Flickable {
                 width: darkModeIcon.width + 16
                 height: darkModeIcon.height + 8
                 radius: Variable.radius.small
-                color: Config.options.appearance.darkMode ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                color: "transparent"
+                Rectangle {
+                    width: Config.options.appearance.darkMode ? parent.width : parent.hovered ? parent.width : 2
+                    height: parent.height
+                    radius: Variable.radius.smallest
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: Config.options.appearance.darkMode ? Color.colors.primary : Color.colors.primary_container
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    Behavior on width {
+                        NumberAnimation {
+                            duration: 200
+                        }
+                    }
+                }
                 LucideIcon {
                     id: darkModeIcon
                     icon: "moon"
@@ -175,6 +214,11 @@ Flickable {
                         root.setTheme();
                     }
                 }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
             }
         }
         LucideIcon {
@@ -195,7 +239,7 @@ Flickable {
                     width: text.width + 16
                     height: text.height + 8
                     radius: Variable.radius.small
-                    color: Config.options.appearance.palette.type === modelData ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: "transparent"
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
@@ -210,10 +254,34 @@ Flickable {
                             root.setTheme();
                         }
                     }
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
+                    Rectangle {
+                        width: Config.options.appearance.palette.type === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        height: parent.height
+                        radius: Variable.radius.smallest
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Config.options.appearance.palette.type === modelData ? Color.colors.primary : Color.colors.primary_container
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     Text {
                         id: text
                         text: modelData
                         anchors.centerIn: parent
+                        font.family: Variable.font.family.main
+                        font.weight: Font.Normal
                         color: Config.options.appearance.palette.type === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
                 }

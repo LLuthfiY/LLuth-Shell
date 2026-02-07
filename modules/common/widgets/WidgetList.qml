@@ -13,11 +13,6 @@ ColumnLayout {
     required property string path
     property list<string> widgetList: []
     property list<string> excludedWidgetList: []
-    Rectangle {
-        color: Color.colors.surface_container
-        anchors.fill: parent
-        radius: Variable.radius.small
-    }
 
     Process {
         id: getWidgets
@@ -68,10 +63,27 @@ ColumnLayout {
                     getWidgets.running = true;
                 }
             }
-            color: addHoverHandler.hovered ? Color.colors.surface_container_high : Color.colors.surface_container
             radius: Variable.radius.small
             width: addIcon.width + 16
             height: addIcon.height + 8
+            color: "transparent"
+            Rectangle {
+                width: addHoverHandler.hovered ? parent.width : 2
+                height: parent.height
+                radius: Variable.radius.smallest
+                anchors.verticalCenter: parent.verticalCenter
+                color: addHoverHandler.hovered ? Color.colors.primary : Color.colors.primary_container
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
+            }
             Layout.minimumWidth: 150
             Behavior on color {
                 ColorAnimation {
@@ -81,7 +93,7 @@ ColumnLayout {
             LucideIcon {
                 id: addIcon
                 icon: "plus"
-                color: Color.colors.on_surface
+                color: addHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                 font.pixelSize: Variable.font.pixelSize.small
                 font.weight: Font.DemiBold
                 font.family: Variable.font.family.main
@@ -153,10 +165,17 @@ ColumnLayout {
                     Layout.minimumWidth: 150
                     Layout.fillWidth: true
                     Layout.preferredHeight: text.height + 8
-                    color: Color.colors.surface_container_high
                     radius: Variable.radius.small
                     property bool hovered: false
                     clip: true
+                    color: "transparent"
+                    Rectangle {
+                        width: parent.width
+                        height: 1
+                        radius: Variable.radius.smallest
+                        anchors.bottom: parent.bottom
+                        color: Color.colors.surface_container_high
+                    }
                     HoverHandler {
                         id: itemRootHoverHandler
                     }
@@ -181,16 +200,16 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 24
-                            height: 24
+                            width: 22
+                            height: 22
                             LucideIcon {
                                 icon: "x"
-                                color: Color.colors.on_surface
+                                color: closeHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.small
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
-                            color: closeHoverHandler.hovered ? Color.colors.surface : Color.colors.surface_container_high
+                            color: closeHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
                             HoverHandler {
@@ -204,17 +223,17 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 24
-                            height: 24
+                            width: 22
+                            height: 22
                             LucideIcon {
                                 icon: "chevron-down"
-                                color: Color.colors.on_surface
+                                color: downHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.small
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
                             anchors.rightMargin: 28
-                            color: downHoverHandler.hovered ? Color.colors.surface : Color.colors.surface_container_high
+                            color: downHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
                             HoverHandler {
@@ -234,17 +253,17 @@ ColumnLayout {
                             }
                         }
                         Rectangle {
-                            width: 24
-                            height: 24
+                            width: 22
+                            height: 22
                             LucideIcon {
                                 icon: "chevron-up"
-                                color: Color.colors.on_surface
+                                color: upHoverHandler.hovered ? Color.colors.on_primary : Color.colors.on_surface
                                 font.pixelSize: Variable.font.pixelSize.small
                                 anchors.centerIn: parent
                             }
                             anchors.right: parent.right
                             anchors.rightMargin: 56
-                            color: upHoverHandler.hovered ? Color.colors.surface : Color.colors.surface_container_high
+                            color: upHoverHandler.hovered ? Color.colors.primary : Color.colors.surface
                             radius: Variable.radius.small
                             anchors.verticalCenter: parent.verticalCenter
                             HoverHandler {

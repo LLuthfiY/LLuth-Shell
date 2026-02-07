@@ -12,8 +12,8 @@ Rectangle {
     property real step: 1
     property bool editable: true
 
-    color: Color.colors.surface_container
-    radius: Variable.radius.normal
+    color: Color.colors.surface
+    radius: Variable.radius.small
     width: wrapper.width
     height: wrapper.height
 
@@ -26,7 +26,7 @@ Rectangle {
             width: 24
             height: 24
             radius: Variable.radius.small
-            color: hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+            color: hovered ? Color.colors.primary : "transparent"
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
@@ -40,9 +40,14 @@ Rectangle {
                     root.value = Math.max((root.value - root.step).toFixed(10), root.min);
                 }
             }
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
             LucideIcon {
                 icon: "minus"
-                color: Color.colors.on_surface
+                color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }
@@ -70,7 +75,7 @@ Rectangle {
             width: 24
             height: 24
             radius: Variable.radius.small
-            color: hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+            color: hovered ? Color.colors.primary : "transparent"
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
@@ -84,9 +89,14 @@ Rectangle {
                     root.value = Math.min((root.value + root.step).toFixed(10), root.max);
                 }
             }
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
             LucideIcon {
                 icon: "plus"
-                color: Color.colors.on_surface
+                color: parent.hovered ? Color.colors.on_primary : Color.colors.on_surface
                 anchors.centerIn: parent
                 font.weight: Font.Normal
             }

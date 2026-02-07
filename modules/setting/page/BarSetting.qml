@@ -41,7 +41,24 @@ ScrollView {
                     width: text.width + 16
                     height: text.height + 8
                     radius: Variable.radius.small
-                    color: Config.options.bar.background === modelData ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: "transparent"
+                    Rectangle {
+                        width: Config.options.bar.background === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        height: parent.height
+                        radius: Variable.radius.smallest
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Config.options.bar.background === modelData ? Color.colors.primary : Color.colors.primary_container
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
@@ -62,6 +79,11 @@ ScrollView {
                         font.family: Variable.font.family.main
                         font.weight: Font.Normal
                         color: Config.options.bar.background === modelData ? Color.colors.on_primary : Color.colors.on_surface
+                    }
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
                     }
                 }
             }
@@ -85,7 +107,24 @@ ScrollView {
                     width: textForeground.width + 16
                     height: textForeground.height + 8
                     radius: Variable.radius.small
-                    color: Config.options.bar.foreground === modelData ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: "transparent"
+                    Rectangle {
+                        width: Config.options.bar.foreground === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        height: parent.height
+                        radius: Variable.radius.smallest
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Config.options.bar.foreground === modelData ? Color.colors.primary : Color.colors.primary_container
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
@@ -107,6 +146,11 @@ ScrollView {
                         font.weight: Font.Normal
                         color: Config.options.bar.foreground === modelData ? Color.colors.on_primary : Color.colors.on_surface
                     }
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
                 }
             }
         }
@@ -127,7 +171,24 @@ ScrollView {
                     width: textPosition.width + 16
                     height: textPosition.height + 8
                     radius: Variable.radius.small
-                    color: Config.options.bar.position === modelData ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: "transparent"
+                    Rectangle {
+                        width: Config.options.bar.position === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        height: parent.height
+                        radius: Variable.radius.smallest
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Config.options.bar.position === modelData ? Color.colors.primary : Color.colors.primary_container
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
@@ -140,6 +201,11 @@ ScrollView {
                         onClicked: {
                             Config.options.bar.position = modelData;
                             WindowManagerUtils.setWM(100);
+                        }
+                    }
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
                         }
                     }
                     LucideIcon {

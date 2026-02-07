@@ -7,7 +7,7 @@ Switch {
     id: root
     background: Rectangle {
         id: backgroundSwitch
-        color: root.checked ? Color.colors.primary : Color.colors.surface_container
+        color: root.checked ? Color.colors.primary : Color.colors.surface
         border.color: Color.colors.primary
         radius: 9999
         implicitWidth: 40

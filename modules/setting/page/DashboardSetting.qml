@@ -40,7 +40,24 @@ ScrollView {
                     width: textPosition.width + 16
                     height: textPosition.height + 8
                     radius: Variable.radius.small
-                    color: Config.options.dashboard.position === modelData ? Color.colors.primary : hovered ? Color.colors.surface_container_high : Color.colors.surface_container
+                    color: "transparent"
+                    Rectangle {
+                        width: Config.options.dashboard.position === modelData ? parent.width : parent.hovered ? parent.width : 2
+                        height: parent.height
+                        radius: Variable.radius.smallest
+                        anchors.verticalCenter: parent.verticalCenter
+                        color: Config.options.dashboard.position === modelData ? Color.colors.primary : Color.colors.primary_container
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+                        Behavior on width {
+                            NumberAnimation {
+                                duration: 200
+                            }
+                        }
+                    }
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true

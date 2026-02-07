@@ -35,8 +35,8 @@ Scope {
             Rectangle {
                 implicitWidth: 200
                 Layout.fillHeight: true
-                color: Color.colors.surface_container
-                radius: Variable.radius.normal
+                color: Color.colors.surface
+                radius: Variable.radius.small
                 ColumnLayout {
                     spacing: 8
                     anchors.fill: parent
@@ -66,17 +66,23 @@ Scope {
                             Layout.preferredHeight: 32
                             Layout.preferredWidth: 200
                             Layout.fillWidth: true
-
-                            color: root.section === index ? Color.colors.primary : hovered ? Color.colors.surface_container_high : "transparent"
-                            radius: Variable.radius.small
-                            Behavior on color {
-                                ColorAnimation {
-                                    duration: 200
+                            color: "transparent"
+                            Rectangle {
+                                width: 2
+                                height: parent.height
+                                radius: 2
+                                color: root.section === index ? Color.colors.primary : hovered ? Color.colors.primary : "transparent"
+                                anchors.verticalCenter: parent.verticalCenter
+                                Behavior on color {
+                                    ColorAnimation {
+                                        duration: 200
+                                    }
                                 }
                             }
+
                             LucideIcon {
                                 icon: modelData.icon
-                                color: root.section === index ? Color.colors.on_primary : hovered ? Color.colors.on_surface : Color.colors.on_surface
+                                color: Color.colors.on_surface
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.left: parent.left
                                 anchors.margins: 8
@@ -103,6 +109,11 @@ Scope {
                         Layout.fillHeight: true
                     }
                 }
+            }
+            Rectangle {
+                color: Color.colors.surface_container_high
+                width: 1
+                Layout.fillHeight: true
             }
             Rectangle {
                 Layout.fillWidth: true
