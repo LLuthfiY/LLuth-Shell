@@ -296,7 +296,9 @@ GridLayout {
     Rectangle {
         implicitWidth: dayOfWeekRow.implicitWidth
         height: weekNumberColumn.parent.height
-        color: Color.colors.primary_container
+        border.color: Color.colors.primary_container
+        border.width: 2
+        color: "transparent"
         radius: Variable.radius.small
         Layout.column: 1
         Layout.row: 2
@@ -316,11 +318,13 @@ GridLayout {
                 radius: Variable.radius.small
                 property bool isCurrent: model.day === systemClock.date.getDate() && model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
                 property bool sameMonth: model.month === systemClock.date.getMonth() && model.year === systemClock.date.getFullYear()
-                color: isCurrent ? Color.colors.primary : "transparent"
+                border.color: isCurrent ? Color.colors.primary : "transparent"
+                border.width: 2
+                color: "transparent"
                 Text {
                     text: model.day
                     font.pixelSize: 14
-                    color: parent.isCurrent ? Color.colors.on_primary : parent.sameMonth ? Color.colors.on_surface : "#77" + Color.colors.on_surface.slice(1)
+                    color: parent.sameMonth ? Color.colors.on_surface : "#77" + Color.colors.on_surface.slice(1)
                     font.weight: Font.Bold
                     font.family: Variable.font.family.main
                     anchors.centerIn: parent

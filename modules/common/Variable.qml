@@ -31,7 +31,7 @@ Singleton {
     }
     font: QtObject {
         property QtObject family: QtObject {
-            property string main: "Noto Sans"
+            property string main: "Noto Color Emoji"
             property string iconLucide: lucide.font.family
         }
         property QtObject pixelSize: QtObject {

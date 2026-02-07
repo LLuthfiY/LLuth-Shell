@@ -9,7 +9,9 @@ import qs.services
 
 Rectangle {
     id: root
-    color: Color.colors.surface_container
+    color: "transparent"
+    border.color: Color.colors.primary_container
+    border.width: 2
     width: parent.width
     height: 82
     radius: Variable.radius.small
@@ -17,24 +19,32 @@ Rectangle {
     ColumnLayout {
         id: col
         anchors.fill: parent
-        anchors.margins: 8
+        anchors.margins: 16
         RowLayout {
             spacing: 8
             LucideIcon {
                 icon: "cpu"
-                color: Color.colors.on_surface
+                color: Color.colors.on_surface_variant
                 font.pixelSize: 24
             }
             Rectangle {
-                color: Color.colors.primary_container
-                radius: Variable.radius.small
                 Layout.fillWidth: true
-                height: 8
+                color: "transparent"
+                Layout.preferredHeight: 8
+                Rectangle {
+                    color: Color.colors.primary_container
+                    radius: Variable.radius.small
+                    width: parent.width
+                    height: 2
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
                 Rectangle {
                     width: parent.width * CPU.cpuUsage / 100
                     height: 8
                     color: Color.colors.primary
                     radius: Variable.radius.small
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
         }
@@ -42,19 +52,27 @@ Rectangle {
             spacing: 8
             LucideIcon {
                 icon: "memory-stick"
-                color: Color.colors.on_surface
+                color: Color.colors.on_surface_variant
                 font.pixelSize: 24
             }
             Rectangle {
-                color: Color.colors.primary_container
-                radius: Variable.radius.small
                 Layout.fillWidth: true
-                height: 8
+                color: "transparent"
+                Layout.preferredHeight: 8
+                Rectangle {
+                    color: Color.colors.primary_container
+                    radius: Variable.radius.small
+                    width: parent.width
+                    height: 2
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
                 Rectangle {
                     width: parent.width * RAM.ramUsage / 100
                     height: 8
                     color: Color.colors.primary
                     radius: Variable.radius.small
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
         }

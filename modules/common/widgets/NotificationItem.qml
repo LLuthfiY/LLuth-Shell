@@ -53,18 +53,27 @@ Item {
     Rectangle {
         id: background
         anchors.fill: parent
-        color: Color.colors.surface_container_high
-
-        radius: 16
+        color: Color.colors.surface
+        border.color: Color.colors.primary_container
+        border.width: 2
+        radius: Variable.radius.small
+        TapHandler {
+            acceptedButtons: Qt.RightButton
+            onTapped: {
+                root.opacity = 0;
+                root.implicitHeight = 0;
+                closeTimer.start();
+            }
+        }
     }
 
     ColumnLayout {
         id: content
-        spacing: 8
+        spacing: 0
         Rectangle {
             id: appNameBackground
 
-            color: Color.colors.surface_container
+            color: "transparent"
             Layout.preferredWidth: Variable.sizes.notificationPopupWidth - 16
             Layout.alignment: Qt.AlignTop
             Layout.leftMargin: 8
@@ -83,37 +92,6 @@ Item {
                 anchors.left: parent.left
                 anchors.margins: 8
             }
-            Rectangle {
-                id: closeButtonBackground
-                color: Color.colors.surface_container
-                width: 16
-                height: 16
-                radius: 8
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.margins: 8
-                anchors.verticalCenter: parent.verticalCenter
-
-                LucideIcon {
-                    id: closeIcon
-                    icon: "x"
-                    color: Color.colors.on_surface
-                    font.pixelSize: Variable.font.pixelSize.normal
-                    font.bold: true
-                    anchors.centerIn: parent
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (root.notificationObject.popup) {
-                            Notification.timeoutNotification(notificationObject.notificationId);
-                        } else {
-                            Notification.discardNotification(notificationObject.notificationId);
-                        }
-                    }
-                }
-            }
         }
 
         RowLayout {
@@ -121,6 +99,7 @@ Item {
             Layout.fillWidth: true
             Layout.leftMargin: 16
             Layout.rightMargin: 16
+            Layout.topMargin: Variable.margin.small
 
             NotificationAppIcon {
                 id: appIcon
@@ -195,14 +174,21 @@ Item {
                     width: buttonText.implicitWidth + 16
                     height: buttonText.implicitHeight + 8
                     radius: 8
-                    color: hovered ? Color.colors.surface_container : Color.colors.surface
+                    color: hovered ? Color.colors.primary_container : Color.colors.surface
+                    border.color: Color.colors.primary_container
+                    border.width: 1
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
                     Text {
                         id: buttonText
                         text: modelData.text
                         color: Color.colors.on_surface
-                        font.pointSize: 12
+                        font.pixelSize: 12
                         font.family: Variable.font.family.main
-                        font.bold: true
+                        font.weight: Font.Normal
                         anchors.centerIn: parent
                     }
                     MouseArea {
